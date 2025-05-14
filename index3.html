@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Luxarous Jewelry</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* Swirl Cursor */
+.cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d4af37; /* Golden outline */
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+  backdrop-filter: blur(2px);
+  background: rgba(212, 175, 55, 0.2); /* light golden background */
+}
+
+
+    
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+      
+      font-family: 'Playfair Display', serif;
+      background: #0d0d0d;
+      color: white;
+      position: relative;
+      cursor: none;
+    }
+    html {
+  scroll-behavior: smooth;
+}
+
+    /* 3D-like animated background */
+    .background {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at center, rgba(255, 215, 0, 0.2) 0%, transparent 70%),
+                  radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+      background-size: 200% 200%;
+      animation: moveBackground 20s linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes moveBackground {
+      0% {
+        background-position: 0% 0%;
+      }
+      50% {
+        background-position: 100% 100%;
+      }
+      100% {
+        background-position: 0% 0%;
+      }
+    }
+
+    /* Centered Content */
+    /* Fullscreen Hero Section */
+.hero-section {
+  position: relative;
+  height: 100vh;
+  background: url('your-jewelry-background.jpg') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Background Animation: Slight 3D movement effect */
+.hero-section::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  animation: moveBackground 15s infinite linear;
+  z-index: -1; /* Keeps background behind content */
+}
+
+/* 3D effect animation for background */
+@keyframes moveBackground {
+  0% {
+    transform: scale(1) translateX(0) translateY(0);
+  }
+  50% {
+    transform: scale(1.1) translateX(-5%) translateY(5%);
+  }
+  100% {
+    transform: scale(1) translateX(0) translateY(0);
+  }
+}
+
+/* Hero content centered */
+.hero-content {
+  text-align: center;
+  z-index: 10;
+}
+
+.brand-name {
+  font-size: 4rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out forwards 0.5s;
+}
+
+.tagline {
+  font-size: 1.5rem;
+  font-family: 'Cormorant Garamond', serif;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out forwards 1s;
+  margin-top: 20px;
+}
+
+.cta-button {
+  background: #d4af37;
+  color: black;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  margin-top: 40px;
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in-out forwards 1.5s;
+}
+
+.cta-button:hover {
+  background: #ffd700;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
+    /* about section */
+    .about-section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  padding: 80px 20px;
+  position: relative;
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 60px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.about-image {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4); /* subtle gold glow */
+  transform: translateY(50px);
+  opacity: 0;
+  transition: all 1s ease;
+}
+
+.about-text {
+  flex: 1;
+  color: #fff;
+}
+
+.about-text h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #d4af37; /* gold */
+}
+
+.about-text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+
+/* feature collection section  */
+.featured-section {
+  background: #0d0d0d;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.featured-title {
+  font-size: 3rem;
+  margin-bottom: 60px;
+  color: #d4af37; /* gold */
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  perspective: 1000px;
+}
+
+.card-content {
+  background: #111;
+  border: 2px solid #d4af37;
+  border-radius: 20px;
+  padding: 80px 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+.card:hover .card-content {
+  transform: rotateY(10deg) rotateX(10deg);
+  box-shadow: 0 20px 40px rgba(212, 175, 55, 0.4);
+}
+
+/* animated scroll video */
+.experience-section {
+  background: #111;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.experience-title {
+  font-size: 3rem;
+  margin-bottom: 40px;
+  color: #d4af37;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+
+
+
+/* testi */
+.testimonials-section {
+  background: #0d0d0d;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.testimonials-section h2 {
+  font-size: 3rem;
+  margin-bottom: 50px;
+  color: #d4af37;
+  font-family: 'Playfair Display', serif;
+}
+
+.testimonial-carousel {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 40px;
+  padding: 20px 0;
+}
+
+.testimonial {
+  flex: 0 0 300px;
+  background: #111;
+  border: 1px solid #d4af37;
+  padding: 40px 20px;
+  border-radius: 20px;
+  font-style: italic;
+  font-size: 1.2rem;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+}
+
+/* news subscription */
+.newsletter-section {
+  background: #111;
+  color: white;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.newsletter-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: #d4af37;
+  font-family: 'Playfair Display', serif;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.newsletter-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #d4af37;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  width: 300px;
+  transition: border-color 0.3s ease;
+}
+
+.newsletter-form input:focus {
+  outline: none;
+  border-color: #ffd700;
+}
+
+.newsletter-form button {
+  background: #d4af37;
+  color: black;
+  border: none;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background: #ffd700;
+}
+
+
+
+/* legacy section */
+.legacy-section {
+  background: linear-gradient(to bottom, #0d0d0d, #111);
+  color: white;
+  padding: 100px 20px;
+  text-align: center;
+}
+
+.legacy-content {
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: 'Playfair Display', serif;
+}
+
+.legacy-content h2 {
+  font-size: 3rem;
+  color: #d4af37;
+  margin-bottom: 30px;
+}
+
+.legacy-content p {
+  font-size: 1.3rem;
+  line-height: 1.8;
+  color: #ccc;
+}
+
+/* footer sectiom */
+.footer-section {
+  background: #0d0d0d;
+  color: white;
+  text-align: center;
+  padding: 40px 20px;
+  font-family: 'Playfair Display', serif;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.footer-text {
+  font-size: 1.2rem;
+}
+
+.footer-text p {
+  margin: 0;
+  color: #ccc;
+}
+
+.footer-social {
+  display: flex;
+  gap: 20px;
+}
+
+.social-icon {
+  font-size: 24px;
+  color: #d4af37; /* Golden color */
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: #ffd700; /* Brighter gold on hover */
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+  
+
+  <div class="background"></div>
+
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="brand-name">Luxarious</h1>
+      <p class="tagline">Eternal Beauty. Crafted for You.</p>
+      <button class="cta-button">Explore Collection</button>
+    </div>
+  </section>
+  
+
+  <!-- aboutsection -->
+  <section class="about-section">
+    <div class="about-container">
+      <div class="about-image" style="background-image: url('https://images.pexels.com/photos/12865908/pexels-photo-12865908.jpeg');"></div>
+      <div class="about-text">
+        <h2>Our Craftsmanship</h2>
+        <div style="width: 155px; height: 3px; background: #d4af37; margin: 20px 0;"></div>
+        <p>
+          At Luxarous, every piece tells a story of heritage and passion. 
+          Crafted by master artisans, our jewelry embodies eternal elegance and timeless luxury.
+        </p>
+      </div>
+    </div>
+  </section>
+  
+
+
+  <!-- feature collection section -->
+  <section class="featured-section">
+    <div class="featured-title">Featured Collections</div>
+    <div class="featured-grid">
+      <div class="card">
+        <div class="card-content" style=" background-image: url('data:image/jpeg;base64,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');">Rings</div>
+      </div>
+      <div class="card">
+        <div class="card-content" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmGM_afFEIjmdth54xj1Q1S9tTVhnxuT8EBQ&s');">Necklaces</div>
+      </div>
+      <div class="card">
+        <div class="card-content" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDeKmiuPU9kD9yPFAEM3wcxvAVAAuMLwQR2g&s');">Earrings</div>
+      </div>
+      <div class="card">
+        <div class="card-content" style="background-image: url('https://www.tanishq.co.in/dw/image/v2/BKCK_PRD/on/demandware.static/-/Sites-Tanishq-product-catalog/default/dwcbc20efb/images/hi-res/513018BTSAA00.jpg?sw=640&sh=640');">Bracelets</div>
+      </div>
+      <div class="card">
+        <div class="card-content" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrsvr_0rQzlgkV6a56mxt6HkoPcEE4wPDrFw&s');" >Bracelets</div>
+      </div>
+      <div class="card">
+        <div class="card-content" style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-KCiuP-QJwr9T_R5ji8DQTAH9YylJQk4twg&s');">Bracelets</div>
+      </div>
+    </div>
+  </section>
+  
+
+
+  <!-- video -->
+  <section class="experience-section">
+    <div class="experience-title">Experience Craftsmanship</div>
+    <div class="video-container">
+      <img src="https://www.gasbijoux.com/pub/media/wysiwyg/gi-savoir-faire-site.gif" >
+  </section>
+   
+  
+ 
+
+
+  <!-- testi -->
+  <section class="testimonials-section">
+    <h2>What They Say</h2>
+    <div class="testimonial-carousel">
+      <div class="testimonial-slide">
+        <div class="testimonial">"A masterpiece of craftsmanship and elegance." — Vogue</div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial">"Jewelry that redefines luxury." — Harper's Bazaar</div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial">"The epitome of timeless beauty." — GQ</div>
+      </div>
+      <div class="testimonial-slide">
+        <div class="testimonial">"Every piece tells a story." — Elle</div>
+      </div>
+    </div>
+  
+    <!-- Optional navigation buttons -->
+    <button class="carousel-button prev" onclick="moveSlide(-1)">&#10094;</button>
+    <button class="carousel-button next" onclick="moveSlide(1)">&#10095;</button>
+  </section>
+  
+
+
+  <!-- newsletter subscription -->
+  <section class="newsletter-section">
+    <h2>Join Our World of Luxury</h2>
+    <form class="newsletter-form">
+      <input type="email" placeholder="Enter your email" required>
+      <button type="submit">GET IN TOUCH</button>
+    </form>
+  </section>
+  
+
+  <!-- legacy section -->
+  <section class="legacy-section">
+    <div class="legacy-content">
+      <h2>Our Legacy</h2>
+      <p>For decades, Luxarous has been crafting timeless treasures that transcend generations. Rooted in tradition, elevated by innovation, each creation tells a story of passion, precision, and prestige.</p>
+    </div>
+  </section>
+  
+
+  <!-- footer -->
+  <section class="footer-section">
+    <div class="footer-content">
+      <div class="footer-text">
+        <p>&copy; 2025 Luxarious. All Rights Reserved.</p>
+        <p>Designed with elegance. Crafted for you.</p>
+      </div>
+      <div class="footer-social">
+        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
+      </div>
+    </div>
+  </section>
+  
+  
+  
+</body>
+<script>
+    document.querySelector('.cta-button').addEventListener('click', function() {
+  document.querySelector('.next-section').scrollIntoView({
+    behavior: 'smooth',
+    block: 'start'
+  });
+});
+
+
+
+
+ window.addEventListener('scroll', function() {
+  const aboutImage = document.querySelector('.about-image');
+  const aboutText = document.querySelector('.about-text p');
+  const sectionTop = document.querySelector('.about-section').offsetTop;
+  const scrollPos = window.scrollY + window.innerHeight;
+
+  if (scrollPos > sectionTop + 100) {
+    aboutImage.style.opacity = 1;
+    aboutImage.style.transform = "translateY(0px)";
+    aboutText.style.opacity = 1;
+    aboutText.style.transform = "translateY(0px)";
+  }
+});
+
+
+
+
+
+
+// cursor 
+// Create cursor element
+const cursor = document.createElement('div');
+cursor.classList.add('cursor');
+document.body.appendChild(cursor);
+
+let mouseX = 0, mouseY = 0;
+let posX = 0, posY = 0;
+
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+});
+
+function animateCursor() {
+  // Ease the position a bit slower to create swirl effect
+  posX += (mouseX - posX) * 0.1;
+  posY += (mouseY - posY) * 0.1;
+
+  cursor.style.left = posX + 'px';
+  cursor.style.top = posY + 'px';
+
+  requestAnimationFrame(animateCursor);
+}
+
+animateCursor();
+
+</script>
+</html>
